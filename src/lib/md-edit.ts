@@ -35,8 +35,31 @@ export const insert =
   () => ({ text: snippet, selStart, selEnd });
 
 /**
- * Apply a transform to the current selection of a textarea, push the new
- * value through `onChange`, and restore a sensible selection afterward.
+ * Replace text in a textarea so the change stays on the browser's native
+ * undo stack (Ctrl/Cmd+Z). We use `execCommand("insertText")` — the only
+ * API that writes to the undo history and emits an `input` event, which keeps
+ * React state in sync. Falls back to a direct value set if it isn't supported.
+ */
+function insertText(
+  el: HTMLTextAreaElement,
+  start: number,
+  end: number,
+  text: string,
+  onChange: (next: string) => void,
+) {
+  el.focus();
+  el.setSelectionRange(start, end);
+  const ok = document.execCommand("insertText", false, text);
+  if (!ok) {
+    const value = el.value;
+    onChange(value.slice(0, start) + text + value.slice(end));
+  }
+}
+
+/**
+ * Apply a transform to the current selection of a textarea (toolbar button or
+ * keyboard shortcut), keeping the edit undoable, then select the placeholder
+ * portion of whatever was inserted.
  */
 export function applyEdit(
   el: HTMLTextAreaElement,
@@ -47,10 +70,25 @@ export function applyEdit(
   const start = el.selectionStart;
   const end = el.selectionEnd;
   const { text, selStart, selEnd } = transform(value.slice(start, end));
-  onChange(value.slice(0, start) + text + value.slice(end));
+  insertText(el, start, end, text, onChange);
   requestAnimationFrame(() => {
     el.focus();
     el.setSelectionRange(start + selStart, start + selEnd);
+  });
+}
+
+/** Insert plain text at the cursor (e.g. a Tab), keeping it undoable. */
+export function insertAtCursor(
+  el: HTMLTextAreaElement,
+  text: string,
+  onChange: (next: string) => void,
+) {
+  const start = el.selectionStart;
+  const end = el.selectionEnd;
+  insertText(el, start, end, text, onChange);
+  requestAnimationFrame(() => {
+    el.focus();
+    el.setSelectionRange(start + text.length, start + text.length);
   });
 }
 
