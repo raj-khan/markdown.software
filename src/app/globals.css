@@ -151,6 +151,17 @@ body {
   background: var(--color-paper);
 }
 
+/* github-markdown-css leaves top-level list markers to the browser default,
+   but Tailwind's preflight resets `list-style: none`. Restore it within the
+   rendered document so ordered/unordered lists show markers — and so the
+   preview matches the exported PDF, which has no Tailwind reset. (github's
+   own nested rules, e.g. lower-roman for `ol ol`, are more specific and still
+   win.) */
+.markdown-body ol,
+.markdown-body ul {
+  list-style: revert;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .is-pressing {
     animation: none;
