@@ -5,12 +5,12 @@ export type Template = {
   content: string;
 };
 
-export const DEFAULT_DOC = `# Markdown to PDF
+export const DEFAULT_DOC = `# Set plain text. Export a page.
 
-Write **Markdown** on the left, see a live preview on the right, and
-download a polished **PDF** with one click.
+Type **Markdown** on the left and watch it set on the page to the right.
+When it looks right, **Export PDF** — what you see is exactly what prints.
 
-> Open source. Free. No sign-up required. — [markdowntopdf.sh](https://www.markdowntopdf.sh)
+> Free, open source, no sign-up. Press ⇧⌘E to export anytime. — [markdowntopdf.sh](https://www.markdowntopdf.sh)
 
 ## Features
 
