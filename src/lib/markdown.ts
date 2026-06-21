@@ -24,6 +24,13 @@ const schema = {
     code: [...(defaultSchema.attributes?.code ?? []), "className"],
     span: [...(defaultSchema.attributes?.span ?? []), "className"],
     input: [...(defaultSchema.attributes?.input ?? []), "checked", "disabled"],
+    img: [
+      ...(defaultSchema.attributes?.img ?? []),
+      "alt",
+      "title",
+      "width",
+      "height",
+    ],
   },
 };
 
