@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# markdowntopdf.sh
 
-## Getting Started
+> Free &amp; open-source **Markdown → PDF**. Write Markdown with a live preview
+> and download a polished, vector-quality PDF — no sign-up required.
 
-First, run the development server:
+An open-source take on [markdowntopdf.com](https://www.markdowntopdf.com),
+built with a [readme.so](https://readme.so/editor)-style split editor.
+
+![Editor screenshot](docs/screenshot.png)
+
+## Features
+
+- ✍️ **Live split editor** — Markdown on the left, instant preview on the right
+- 🧰 **Formatting toolbar** — bold, italic, headings, links, images, code, tables, and more
+- 📄 **High-quality PDF export** — real vector text, syntax-highlighted code, GitHub-style typography
+- 🎛️ **Page options** — A4 / Letter / Legal / A3 and configurable margins
+- 🧩 **Templates** — README, resume, and blank starters
+- 💾 **Autosave** — your document is kept in `localStorage`
+- 🔓 **No account needed** — optional Supabase integration adds cloud sync if you want it
+- 🆓 **MIT licensed** — self-host it anywhere
+
+## Quick start
 
 ```bash
+git clone https://github.com/markdowntopdf/markdowntopdf.sh
+cd markdowntopdf.sh
+npm install
+cp .env.example .env.local   # optional — see notes below
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Local PDF rendering
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+PDF generation uses a headless browser. **Locally**, the app auto-detects a
+system Chrome/Chromium (e.g. `/usr/bin/google-chrome`). If yours lives
+somewhere unusual, set it explicitly in `.env.local`:
 
-## Learn More
+```bash
+CHROME_PATH=/path/to/google-chrome
+```
 
-To learn more about Next.js, take a look at the following resources:
+**On Vercel / serverless**, it uses the bundled
+[`@sparticuz/chromium`](https://github.com/Sparticuz/chromium) automatically —
+no configuration needed.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How it works
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+            ┌──────────────┐   shared unified pipeline   ┌──────────────┐
+Markdown ─▶ │  src/lib/    │ ─────────────────────────▶ │ Live preview │
+            │  markdown.ts │  (remark → rehype → HTML)   │  (client)    │
+            └──────┬───────┘                             └──────────────┘
+                   │ same HTML + same CSS
+                   ▼
+            ┌──────────────┐   Puppeteer (headless Chrome)   ┌─────────┐
+            │ /api/pdf     │ ──────────────────────────────▶ │   PDF   │
+            └──────────────┘                                 └─────────┘
+```
 
-## Deploy on Vercel
+The **exact same** Markdown→HTML pipeline and stylesheet drive both the
+on-screen preview and the exported PDF, so what you see is what you download.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tech stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Layer       | Choice                                                |
+| ----------- | ----------------------------------------------------- |
+| Framework   | Next.js 16 (App Router) + React 19                    |
+| Styling     | Tailwind CSS v4                                        |
+| Markdown    | `unified` / `remark` / `rehype` (+ GFM, highlight.js) |
+| PDF engine  | `puppeteer-core` + `@sparticuz/chromium`              |
+| State       | `zustand` (with `localStorage` persistence)           |
+| Auth (opt.) | Supabase                                              |
+| Hosting     | Vercel (works anywhere Node runs)                     |
+
+## Deploy
+
+The app deploys to Vercel with zero config. Push to GitHub and import the
+repo, or:
+
+```bash
+npm i -g vercel
+vercel
+```
+
+No environment variables are required for the core tool. To enable accounts +
+cloud-saved documents, add your Supabase keys (see [`.env.example`](.env.example))
+and run [`supabase/schema.sql`](supabase/schema.sql).
+
+## Roadmap
+
+See [`PLAN.md`](PLAN.md) for the full architecture and phased rollout plan.
+
+## Contributing
+
+Contributions are very welcome — see [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+## License
+
+[MIT](LICENSE) © markdowntopdf.sh contributors
