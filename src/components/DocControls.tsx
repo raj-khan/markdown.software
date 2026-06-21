@@ -10,18 +10,19 @@ const fieldBase =
   "h-9 rounded-md border border-shell-line bg-shell-raised text-sm text-chalk focus-ring hover:border-chalk-dim transition-colors";
 
 export function DocControls({ variant }: { variant: Variant }) {
-  const { filename, options, setFilename, setOptions, reset } = useEditorStore();
+  const { filename, options, templateId, setFilename, setOptions, loadTemplate } =
+    useEditorStore();
 
   function handleTemplate(id: string) {
     const template = TEMPLATES.find((t) => t.id === id);
-    if (template) reset(template.content);
+    if (template) loadTemplate(template.id, template.content);
   }
 
   const stacked = variant === "stacked";
   const group = stacked ? "flex flex-col gap-1.5" : "contents";
-  const label = stacked
-    ? "text-xs font-medium text-chalk-dim"
-    : "sr-only";
+  const label = stacked ? "text-xs font-medium text-chalk-dim" : "sr-only";
+  // Rendered in two places (header + mobile menu); keep ids unique per variant.
+  const uid = (name: string) => `${name}-${variant}`;
 
   return (
     <div
@@ -30,16 +31,13 @@ export function DocControls({ variant }: { variant: Variant }) {
       }
     >
       <div className={group}>
-        <label htmlFor="template" className={label}>
+        <label htmlFor={uid("template")} className={label}>
           Template
         </label>
         <select
-          id="template"
-          defaultValue=""
-          onChange={(e) => {
-            handleTemplate(e.target.value);
-            e.target.value = "";
-          }}
+          id={uid("template")}
+          value={templateId}
+          onChange={(e) => handleTemplate(e.target.value)}
           className={`${fieldBase} px-2 ${stacked ? "w-full" : ""}`}
         >
           <option value="" disabled>
@@ -54,11 +52,11 @@ export function DocControls({ variant }: { variant: Variant }) {
       </div>
 
       <div className={group}>
-        <label htmlFor="page-size" className={label}>
+        <label htmlFor={uid("page-size")} className={label}>
           Page size
         </label>
         <select
-          id="page-size"
+          id={uid("page-size")}
           value={options.pageSize}
           onChange={(e) =>
             setOptions({
@@ -76,7 +74,7 @@ export function DocControls({ variant }: { variant: Variant }) {
       </div>
 
       <div className={group}>
-        <label htmlFor="filename" className={label}>
+        <label htmlFor={uid("filename")} className={label}>
           File name
         </label>
         <div
@@ -85,7 +83,7 @@ export function DocControls({ variant }: { variant: Variant }) {
           }`}
         >
           <input
-            id="filename"
+            id={uid("filename")}
             value={filename}
             onChange={(e) => setFilename(e.target.value)}
             placeholder="document"
