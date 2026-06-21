@@ -7,7 +7,7 @@ import { PAGE_SIZES } from "@/lib/pdf-options";
 type Variant = "inline" | "stacked";
 
 const fieldBase =
-  "h-9 rounded-md border border-line bg-surface text-sm text-ink focus-ring hover:border-zinc-300 transition-colors";
+  "h-9 rounded-md border border-shell-line bg-shell-raised text-sm text-chalk focus-ring hover:border-chalk-dim transition-colors";
 
 export function DocControls({ variant }: { variant: Variant }) {
   const { filename, options, setFilename, setOptions, reset } = useEditorStore();
@@ -20,7 +20,7 @@ export function DocControls({ variant }: { variant: Variant }) {
   const stacked = variant === "stacked";
   const group = stacked ? "flex flex-col gap-1.5" : "contents";
   const label = stacked
-    ? "text-xs font-medium text-muted"
+    ? "text-xs font-medium text-chalk-dim"
     : "sr-only";
 
   return (
@@ -80,7 +80,7 @@ export function DocControls({ variant }: { variant: Variant }) {
           File name
         </label>
         <div
-          className={`flex h-9 items-center rounded-md border border-line bg-surface pr-2 focus-within:border-accent ${
+          className={`flex h-9 items-center rounded-md border border-shell-line bg-shell-raised pr-2 focus-within:border-rust ${
             stacked ? "w-full" : ""
           }`}
         >
@@ -89,11 +89,11 @@ export function DocControls({ variant }: { variant: Variant }) {
             value={filename}
             onChange={(e) => setFilename(e.target.value)}
             placeholder="document"
-            className={`h-full rounded-l-md bg-transparent px-2.5 text-sm text-ink outline-none ${
+            className={`h-full rounded-l-md bg-transparent px-2.5 text-sm text-chalk outline-none placeholder:text-chalk-dim ${
               stacked ? "flex-1" : "w-28"
             }`}
           />
-          <span className="text-xs text-muted">.pdf</span>
+          <span className="text-xs text-chalk-dim">.pdf</span>
         </div>
       </div>
     </div>
