@@ -7,9 +7,12 @@ type EditorState = {
   markdown: string;
   filename: string;
   options: PdfOptions;
+  /** Transient: true while a PDF export is in flight (drives the press animation). */
+  pressing: boolean;
   setMarkdown: (markdown: string) => void;
   setFilename: (filename: string) => void;
   setOptions: (options: Partial<PdfOptions>) => void;
+  setPressing: (pressing: boolean) => void;
   reset: (markdown: string) => void;
 };
 
@@ -19,10 +22,12 @@ export const useEditorStore = create<EditorState>()(
       markdown: DEFAULT_DOC,
       filename: "document",
       options: DEFAULT_PDF_OPTIONS,
+      pressing: false,
       setMarkdown: (markdown) => set({ markdown }),
       setFilename: (filename) => set({ filename }),
       setOptions: (options) =>
         set((state) => ({ options: { ...state.options, ...options } })),
+      setPressing: (pressing) => set({ pressing }),
       reset: (markdown) => set({ markdown }),
     }),
     {

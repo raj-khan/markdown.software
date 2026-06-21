@@ -32,7 +32,7 @@ export function SettingsMenu() {
         aria-haspopup="dialog"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="focus-ring flex h-9 w-9 items-center justify-center rounded-md border border-line text-muted transition-colors hover:border-zinc-300 hover:text-ink"
+        className="focus-ring flex h-9 w-9 items-center justify-center rounded-md border border-shell-line text-chalk-dim transition-colors hover:border-chalk-dim hover:text-chalk"
       >
         <SlidersHorizontal size={18} />
       </button>
@@ -41,15 +41,15 @@ export function SettingsMenu() {
         <div
           role="dialog"
           aria-label="Document settings"
-          className="absolute right-0 z-20 mt-2 w-64 rounded-xl border border-line bg-surface p-4 shadow-lg"
+          className="absolute right-0 z-20 mt-2 w-64 rounded-xl border border-shell-line bg-shell-raised p-4 shadow-xl"
         >
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-ink">Settings</h2>
+            <h2 className="font-display text-sm font-medium text-chalk">Settings</h2>
             <button
               type="button"
               aria-label="Close settings"
               onClick={() => setOpen(false)}
-              className="focus-ring flex h-7 w-7 items-center justify-center rounded-md text-muted hover:bg-zinc-100 hover:text-ink"
+              className="focus-ring flex h-7 w-7 items-center justify-center rounded-md text-chalk-dim hover:bg-shell hover:text-chalk"
             >
               <X size={16} />
             </button>
