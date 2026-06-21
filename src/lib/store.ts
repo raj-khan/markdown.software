@@ -11,11 +11,14 @@ type EditorState = {
   pressing: boolean;
   /** Desktop split: fraction of width given to the editor (0 = preview only, 1 = editor only). */
   splitRatio: number;
+  /** Id of the template the current document was loaded from (for the picker). */
+  templateId: string;
   setMarkdown: (markdown: string) => void;
   setFilename: (filename: string) => void;
   setOptions: (options: Partial<PdfOptions>) => void;
   setPressing: (pressing: boolean) => void;
   setSplitRatio: (ratio: number) => void;
+  loadTemplate: (id: string, content: string) => void;
   reset: (markdown: string) => void;
 };
 
@@ -27,6 +30,7 @@ export const useEditorStore = create<EditorState>()(
       options: DEFAULT_PDF_OPTIONS,
       pressing: false,
       splitRatio: 0.5,
+      templateId: "",
       setMarkdown: (markdown) => set({ markdown }),
       setFilename: (filename) => set({ filename }),
       setOptions: (options) =>
@@ -34,6 +38,8 @@ export const useEditorStore = create<EditorState>()(
       setPressing: (pressing) => set({ pressing }),
       setSplitRatio: (ratio) =>
         set({ splitRatio: Math.min(1, Math.max(0, ratio)) }),
+      loadTemplate: (templateId, content) =>
+        set({ templateId, markdown: content }),
       reset: (markdown) => set({ markdown }),
     }),
     {
@@ -44,6 +50,7 @@ export const useEditorStore = create<EditorState>()(
         filename: state.filename,
         options: state.options,
         splitRatio: state.splitRatio,
+        templateId: state.templateId,
       }),
     },
   ),
