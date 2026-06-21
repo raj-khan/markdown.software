@@ -20,7 +20,7 @@ npm run lint     # must pass
 npm run build    # must pass
 ```
 
-Please keep changes focused — one logical change per pull request.
+Please keep changes focused - one logical change per pull request.
 
 ## Project layout
 
@@ -38,7 +38,7 @@ src/
   lib/
     markdown.ts         # shared Markdown → HTML pipeline
     pdf-document.ts     # HTML document wrapper for printing
-    pdf-styles.ts       # vendored CSS (generated — see below)
+    pdf-styles.ts       # vendored CSS (generated - see below)
     browser.ts          # headless browser launcher
     store.ts            # zustand editor state
     templates.ts        # starter documents

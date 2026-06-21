@@ -9,7 +9,7 @@ import { useExport } from "@/lib/use-export";
 
 const GITHUB_URL = "https://github.com/raj-khan/markdown.software";
 
-/** A print registration target — the mark a press operator lines up by. */
+/** A print registration target - the mark a press operator lines up by. */
 function RegistrationMark({ size = 20 }: { size?: number }) {
 	return (
 		<svg width={size} height={size} viewBox="0 0 20 20" aria-hidden="true">

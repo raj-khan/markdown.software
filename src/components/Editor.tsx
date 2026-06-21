@@ -35,7 +35,7 @@ export function Editor() {
   }, [markdown]);
 
   // Divider drag (desktop). Width is cached at drag start; updates are
-  // rAF-throttled. The preview only reflows — it never re-parses on resize.
+  // rAF-throttled. The preview only reflows - it never re-parses on resize.
   useEffect(() => {
     if (!dragging) return;
     function onMove(e: MouseEvent) {
@@ -125,7 +125,7 @@ export function Editor() {
         className="flex min-h-0 flex-1 flex-col lg:grid"
         style={{ gridTemplateColumns: gridTemplate }}
       >
-        {/* Shell — where you type */}
+        {/* Shell - where you type */}
         <section
           className={`min-h-0 flex-1 flex-col lg:col-start-1 lg:flex ${
             view === "write" ? "flex" : "hidden"
@@ -164,7 +164,7 @@ export function Editor() {
           <span className="h-8 w-1 rounded-full bg-chalk-dim/50 transition-colors group-hover:bg-white/80" />
         </div>
 
-        {/* Paper — what you make */}
+        {/* Paper - what you make */}
         <section
           className={`min-h-0 flex-1 bg-canvas lg:col-start-3 lg:block ${
             view === "preview" ? "block" : "hidden"

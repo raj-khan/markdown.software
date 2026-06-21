@@ -1,4 +1,4 @@
-# markdowntopdf.sh — Architecture &amp; Rollout Plan
+# markdowntopdf.sh - Architecture &amp; Rollout Plan
 
 This document is the north star for building and shipping **markdowntopdf.sh**:
 an open-source, free Markdown→PDF tool inspired by
@@ -22,7 +22,7 @@ an open-source, free Markdown→PDF tool inspired by
 
 - Becoming a full SaaS with billing/teams/seats.
 - Locking core functionality behind accounts. The tool must be 100% usable
-  without signing in — accounts are strictly additive.
+  without signing in - accounts are strictly additive.
 
 ---
 
@@ -35,22 +35,22 @@ SaaS boilerplate.**
 
 | Concern        | Full SaaS boilerplate                         | This project's approach                          |
 | -------------- | --------------------------------------------- | ------------------------------------------------ |
-| Core value     | Gated behind auth/billing                     | Free, instant, no login — the whole point        |
+| Core value     | Gated behind auth/billing                     | Free, instant, no login - the whole point        |
 | Surface area   | Auth, billing, dashboards, RBAC, emails…      | One editor + one API route                       |
-| Contributor on-ramp | Steep                                    | Shallow — read it in an afternoon                |
+| Contributor on-ramp | Steep                                    | Shallow - read it in an afternoon                |
 | PDF engine     | Not included anyway                           | First-class                                      |
 | Time to launch | Weeks of trimming                             | Hours                                            |
 
 Instead we use a **lean Next.js App Router app** and borrow the *good ideas*
 from the SaaS boilerplate **as optional layers**:
 
-- **Supabase** for (optional) auth + saved documents — wired but inert until
+- **Supabase** for (optional) auth + saved documents - wired but inert until
   you add keys. See `src/lib/supabase/*` and `supabase/schema.sql`.
 - **Vercel-first** deployment, env conventions, and project structure.
 - Room to grow into a "Pro" tier later *without* compromising the free tool.
 
 If/when monetization becomes a goal (Pro export options, API plans), the
-Supabase layer is already the seam to build billing onto — at that point the
+Supabase layer is already the seam to build billing onto - at that point the
 SaaS boilerplate's billing patterns can be lifted in deliberately.
 
 ---
@@ -72,7 +72,7 @@ Browser (React 19, client)                    Server (Next.js route handler)
         (remark + rehype + sanitize + highlight → HTML)
 ```
 
-**Key design decision — one pipeline, two outputs.** The on-screen preview and
+**Key design decision - one pipeline, two outputs.** The on-screen preview and
 the server PDF both render through `src/lib/markdown.ts` and the same
 stylesheet (`src/lib/pdf-styles.ts`). This guarantees the PDF matches the
 preview and eliminates a whole class of "looks different when exported" bugs.
@@ -90,7 +90,7 @@ function.
 
 ---
 
-## 4. Current status — Phase 0 (MVP) ✅ DONE
+## 4. Current status - Phase 0 (MVP) ✅ DONE
 
 Everything below is implemented and verified (`npm run build`, `lint`, and a
 real PDF round-trip all pass):
@@ -102,14 +102,14 @@ real PDF round-trip all pass):
 - [x] Server-side PDF export with page-size + margin options
 - [x] Templates (welcome, README, resume, blank)
 - [x] `localStorage` autosave
-- [x] Optional Supabase scaffold (client/server/schema) — inert without keys
+- [x] Optional Supabase scaffold (client/server/schema) - inert without keys
 - [x] Docs: README, CONTRIBUTING, LICENSE (MIT), this plan
 
 ---
 
 ## 5. Roadmap
 
-### Phase 1 — Polish &amp; launch-readiness
+### Phase 1 - Polish &amp; launch-readiness
 - [ ] Mobile/responsive pass (tabbed editor⇄preview on small screens)
 - [ ] Dark mode for the editor chrome (preview/PDF stay print-light)
 - [ ] Drag-to-resize split panes; synced scroll
@@ -119,20 +119,20 @@ real PDF round-trip all pass):
 - [ ] OG image, favicon, `sitemap.ts`, `robots.ts`
 - [ ] Basic analytics (privacy-friendly, e.g. Vercel Analytics)
 
-### Phase 2 — Power features
+### Phase 2 - Power features
 - [ ] PDF theming: font family, font size, line height, page numbers, header/footer
 - [ ] Cover page + table-of-contents generation
 - [ ] Custom CSS injection for advanced users
 - [ ] Mermaid / math (KaTeX) rendering
 - [ ] Shareable links (server-rendered preview of a doc)
 
-### Phase 3 — Accounts (optional tier, additive)
+### Phase 3 - Accounts (optional tier, additive)
 - [ ] Supabase auth (magic link / OAuth)
 - [ ] Save / list / rename / delete documents (schema already in repo)
 - [ ] Sync local doc → cloud on first sign-in
 - [ ] Per-user export history
 
-### Phase 4 — Platform
+### Phase 4 - Platform
 - [ ] Public REST API: `POST /api/pdf` documented + API keys
 - [ ] CLI (`npx markdowntopdf file.md`) hitting the same engine
 - [ ] Embeddable editor widget
@@ -147,7 +147,7 @@ real PDF round-trip all pass):
 **Repository**
 - [ ] Create GitHub org/repo `markdowntopdf/markdowntopdf.sh` (public)
 - [ ] Add issue/PR templates, `CODE_OF_CONDUCT.md`, topics, description
-- [ ] GitHub Actions CI: `lint` + `build` on PRs (see `.github/` — Phase 1)
+- [ ] GitHub Actions CI: `lint` + `build` on PRs (see `.github/` - Phase 1)
 - [ ] Enable Dependabot
 
 **Hosting &amp; domain**
