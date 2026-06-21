@@ -122,12 +122,12 @@ export function Editor() {
 
       <div
         ref={containerRef}
-        className="block min-h-0 flex-1 lg:grid"
+        className="flex min-h-0 flex-1 flex-col lg:grid"
         style={{ gridTemplateColumns: gridTemplate }}
       >
         {/* Shell — where you type */}
         <section
-          className={`min-h-0 flex-col lg:col-start-1 lg:flex ${
+          className={`min-h-0 flex-1 flex-col lg:col-start-1 lg:flex ${
             view === "write" ? "flex" : "hidden"
           } ${previewOnly ? "lg:hidden" : ""}`}
         >
@@ -166,7 +166,7 @@ export function Editor() {
 
         {/* Paper — what you make */}
         <section
-          className={`min-h-0 bg-canvas lg:col-start-3 lg:block ${
+          className={`min-h-0 flex-1 bg-canvas lg:col-start-3 lg:block ${
             view === "preview" ? "block" : "hidden"
           } ${editorOnly ? "lg:hidden" : ""}`}
         >

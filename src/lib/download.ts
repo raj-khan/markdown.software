@@ -39,8 +39,15 @@ export async function downloadPdf({
   const anchor = document.createElement("a");
   anchor.href = url;
   anchor.download = safeName;
+  anchor.style.display = "none";
   document.body.appendChild(anchor);
   anchor.click();
-  anchor.remove();
-  URL.revokeObjectURL(url);
+
+  // Mobile browsers read the blob asynchronously after the click. Revoking
+  // the object URL (or removing the anchor) immediately races that and shows
+  // "Download failed", so we defer cleanup.
+  setTimeout(() => {
+    URL.revokeObjectURL(url);
+    anchor.remove();
+  }, 30_000);
 }

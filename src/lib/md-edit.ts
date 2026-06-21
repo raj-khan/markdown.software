@@ -34,6 +34,34 @@ export const insert =
   (snippet: string, selStart: number, selEnd: number): Transform =>
   () => ({ text: snippet, selStart, selEnd });
 
+// Strips any leading list marker (ordered "1." / "1)" or bullet -, *, +).
+const LIST_MARKER = /^(\s*)(?:\d+[.)]|[-*+])\s+/;
+
+/**
+ * Turn the selected lines into a clean single-level list. Existing markers are
+ * stripped first so re-applying (or applying to already-numbered text) never
+ * produces a nested list like `1. 1.` — which Markdown renders as roman
+ * numerals. Ordered lists are renumbered 1, 2, 3…
+ */
+export const listLines =
+  (ordered: boolean): Transform =>
+  (selected) => {
+    const lines = (selected || "List item").split("\n");
+    let n = 0;
+    const text = lines
+      .map((line) => {
+        const stripped = line.replace(LIST_MARKER, "");
+        if (stripped.trim() === "") return stripped; // leave blank lines alone
+        if (ordered) {
+          n += 1;
+          return `${n}. ${stripped}`;
+        }
+        return `- ${stripped}`;
+      })
+      .join("\n");
+    return { text, selStart: 0, selEnd: text.length };
+  };
+
 /**
  * Replace text in a textarea so the change stays on the browser's native
  * undo stack (Ctrl/Cmd+Z). We use `execCommand("insertText")` — the only

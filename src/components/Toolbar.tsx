@@ -15,7 +15,14 @@ import {
   Table,
   Minus,
 } from "lucide-react";
-import { wrap, prefixLines, insert, applyEdit, type Transform } from "@/lib/md-edit";
+import {
+  wrap,
+  prefixLines,
+  insert,
+  listLines,
+  applyEdit,
+  type Transform,
+} from "@/lib/md-edit";
 
 type ToolbarProps = {
   textareaRef: RefObject<HTMLTextAreaElement | null>;
@@ -39,11 +46,11 @@ const GROUPS: Button[][] = [
   [
     { title: "Heading", icon: <Heading size={15} />, transform: prefixLines("## ") },
     { title: "Quote", icon: <Quote size={15} />, transform: prefixLines("> ") },
-    { title: "Bullet list", icon: <List size={15} />, transform: prefixLines("- ") },
+    { title: "Bullet list", icon: <List size={15} />, transform: listLines(false) },
     {
       title: "Numbered list",
       icon: <ListOrdered size={15} />,
-      transform: prefixLines("1. "),
+      transform: listLines(true),
     },
   ],
   [
@@ -51,12 +58,13 @@ const GROUPS: Button[][] = [
       title: "Link",
       hint: "⌘K",
       icon: <Link2 size={15} />,
-      transform: insert("[link text](https://)", 1, 10),
+      transform: insert("[link text](url)", 1, 10),
     },
     {
       title: "Image",
       icon: <ImageIcon size={15} />,
-      transform: insert("![alt text](https://)", 2, 10),
+      // Select the "url" placeholder so the user types/pastes the address first.
+      transform: insert("![alt text](url)", 12, 15),
     },
     {
       title: "Table",
