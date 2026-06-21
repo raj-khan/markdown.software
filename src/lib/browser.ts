@@ -46,6 +46,8 @@ export async function launchBrowser(): Promise<Browser> {
   }
 
   const chromium = (await import("@sparticuz/chromium")).default;
+  // No WebGL/graphics needed for static PDF rendering; keeps the cold start lean.
+  chromium.setGraphicsMode = false;
   return puppeteer.launch({
     args: chromium.args,
     executablePath: await chromium.executablePath(),
