@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-// Display: a soft, old-style serif with print-shop warmth — used with restraint.
+// Display: a soft, old-style serif with print-shop warmth - used with restraint.
 const fraunces = Fraunces({
   variable: "--font-display",
   subsets: ["latin"],
@@ -26,7 +26,7 @@ const siteUrl = "https://www.markdowntopdf.sh";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "markdowntopdf.sh — Markdown to PDF, free & open source",
+  title: "markdowntopdf.sh - Markdown to PDF, free & open source",
   description:
     "A typesetting bench for plain text. Write Markdown, watch it set on the page, and export a polished PDF. Free, open source, no sign-up.",
   keywords: [
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     "pdf export",
   ],
   openGraph: {
-    title: "Markdown to PDF — free & open source",
+    title: "Markdown to PDF - free & open source",
     description:
       "Write Markdown with a live preview and download a polished PDF.",
     url: siteUrl,

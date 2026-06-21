@@ -25,7 +25,7 @@ export async function downloadPdf({
       const data = await response.json();
       if (data?.error) message = data.error;
     } catch {
-      // Ignore — use the default message.
+      // Ignore - use the default message.
     }
     throw new Error(message);
   }

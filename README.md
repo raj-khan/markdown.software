@@ -1,7 +1,7 @@
 # markdowntopdf.sh
 
 > Free &amp; open-source **Markdown → PDF**. Write Markdown with a live preview
-> and download a polished, vector-quality PDF — no sign-up required.
+> and download a polished, vector-quality PDF - no sign-up required.
 
 An open-source take on [markdowntopdf.com](https://www.markdowntopdf.com),
 built with a [readme.so](https://readme.so/editor)-style split editor.
@@ -10,14 +10,14 @@ built with a [readme.so](https://readme.so/editor)-style split editor.
 
 ## Features
 
-- ✍️ **Live split editor** — Markdown on the left, instant preview on the right
-- 🧰 **Formatting toolbar** — bold, italic, headings, links, images, code, tables, and more
-- 📄 **High-quality PDF export** — real vector text, syntax-highlighted code, GitHub-style typography
-- 🎛️ **Page options** — A4 / Letter / Legal / A3 and configurable margins
-- 🧩 **Templates** — README, resume, and blank starters
-- 💾 **Autosave** — your document is kept in `localStorage`
-- 🔓 **No account needed** — optional Supabase integration adds cloud sync if you want it
-- 🆓 **MIT licensed** — self-host it anywhere
+- ✍️ **Live split editor** - Markdown on the left, instant preview on the right
+- 🧰 **Formatting toolbar** - bold, italic, headings, links, images, code, tables, and more
+- 📄 **High-quality PDF export** - real vector text, syntax-highlighted code, GitHub-style typography
+- 🎛️ **Page options** - A4 / Letter / Legal / A3 and configurable margins
+- 🧩 **Templates** - README, resume, and blank starters
+- 💾 **Autosave** - your document is kept in `localStorage`
+- 🔓 **No account needed** - optional Supabase integration adds cloud sync if you want it
+- 🆓 **MIT licensed** - self-host it anywhere
 
 ## Quick start
 
@@ -25,7 +25,7 @@ built with a [readme.so](https://readme.so/editor)-style split editor.
 git clone https://github.com/markdowntopdf/markdowntopdf.sh
 cd markdowntopdf.sh
 npm install
-cp .env.example .env.local   # optional — see notes below
+cp .env.example .env.local   # optional - see notes below
 npm run dev
 ```
 
@@ -42,7 +42,7 @@ CHROME_PATH=/path/to/google-chrome
 ```
 
 **On Vercel / serverless**, it uses the bundled
-[`@sparticuz/chromium`](https://github.com/Sparticuz/chromium) automatically —
+[`@sparticuz/chromium`](https://github.com/Sparticuz/chromium) automatically -
 no configuration needed.
 
 ## How it works
@@ -94,7 +94,7 @@ See [`PLAN.md`](PLAN.md) for the full architecture and phased rollout plan.
 
 ## Contributing
 
-Contributions are very welcome — see [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Contributions are very welcome - see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## License
 

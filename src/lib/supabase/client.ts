@@ -3,7 +3,7 @@
 import { createBrowserClient } from "@supabase/ssr";
 
 /**
- * Browser-side Supabase client. Auth and document syncing are *optional* —
+ * Browser-side Supabase client. Auth and document syncing are *optional* -
  * the editor works fully without them. Returns `null` when the project has
  * not been configured with Supabase env vars, so callers can no-op.
  */

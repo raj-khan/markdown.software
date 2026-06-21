@@ -40,7 +40,7 @@ const LIST_MARKER = /^(\s*)(?:\d+[.)]|[-*+])\s+/;
 /**
  * Turn the selected lines into a clean single-level list. Existing markers are
  * stripped first so re-applying (or applying to already-numbered text) never
- * produces a nested list like `1. 1.` — which Markdown renders as roman
+ * produces a nested list like `1. 1.` - which Markdown renders as roman
  * numerals. Ordered lists are renumbered 1, 2, 3…
  */
 export const listLines =
@@ -64,7 +64,7 @@ export const listLines =
 
 /**
  * Replace text in a textarea so the change stays on the browser's native
- * undo stack (Ctrl/Cmd+Z). We use `execCommand("insertText")` — the only
+ * undo stack (Ctrl/Cmd+Z). We use `execCommand("insertText")` - the only
  * API that writes to the undo history and emits an `input` event, which keeps
  * React state in sync. Falls back to a direct value set if it isn't supported.
  */
