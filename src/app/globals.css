@@ -5,7 +5,7 @@
   --font-mono: var(--font-mono);
   --font-display: var(--font-display);
 
-  /* "Shell & Paper" — a typesetting bench for plain text.
+  /* "Shell & Paper" - a typesetting bench for plain text.
      The dark shell is where you type; the paper is what you make. */
 
   /* Shell (the editor side) */
@@ -22,7 +22,7 @@
   --color-ink-soft: #57555f;
   --color-line: #e3ded3;
 
-  /* Oxidized-ink accent — the single signal color. */
+  /* Oxidized-ink accent - the single signal color. */
   --color-rust: #b5552f;
   --color-rust-strong: #9a4526;
   --color-rust-tint: #f6ede7;
@@ -127,7 +127,7 @@ body {
   border-left: 1.5px solid var(--color-rust);
 }
 
-/* The "impression" — pressing the sheet when a PDF is exported. */
+/* The "impression" - pressing the sheet when a PDF is exported. */
 @keyframes impress {
   0% {
     transform: scale(1);
@@ -153,13 +153,29 @@ body {
 
 /* github-markdown-css leaves top-level list markers to the browser default,
    but Tailwind's preflight resets `list-style: none`. Restore it within the
-   rendered document so ordered/unordered lists show markers — and so the
+   rendered document so ordered/unordered lists show markers - and so the
    preview matches the exported PDF, which has no Tailwind reset. (github's
    own nested rules, e.g. lower-roman for `ol ol`, are more specific and still
    win.) */
 .markdown-body ol,
 .markdown-body ul {
   list-style: revert;
+}
+
+/* Friendly placeholder swapped in for images that fail to load (see Preview). */
+.markdown-body .img-broken {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em 0.75em;
+  border: 1px dashed #d4956f;
+  border-radius: 6px;
+  background: var(--color-rust-tint);
+  color: var(--color-rust-strong);
+  font-size: 0.85em;
+}
+.markdown-body .img-broken::before {
+  content: "⚠";
 }
 
 @media (prefers-reduced-motion: reduce) {
