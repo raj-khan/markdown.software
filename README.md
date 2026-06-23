@@ -22,8 +22,8 @@ built with a [readme.so](https://readme.so/editor)-style split editor.
 ## Quick start
 
 ```bash
-git clone https://github.com/markdowntopdf/markdowntopdf.sh
-cd markdowntopdf.sh
+git clone https://github.com/raj-khan/markdown.software
+cd markdown.software
 npm install
 cp .env.example .env.local   # optional - see notes below
 npm run dev
