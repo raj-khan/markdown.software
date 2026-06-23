@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { SITE_URL, SITE_NAME } from "@/lib/site";
 import "./globals.css";
 
 // Display: a soft, old-style serif with print-shop warmth - used with restraint.
@@ -22,27 +23,51 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
 });
 
-const siteUrl = "https://www.markdowntopdf.sh";
+const title = "markdowntopdf.sh - Markdown to PDF, free & open source";
+const description =
+  "A typesetting bench for plain text. Write Markdown, watch it set on the page, and export a polished PDF. Free, open source, no sign-up.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: "markdowntopdf.sh - Markdown to PDF, free & open source",
-  description:
-    "A typesetting bench for plain text. Write Markdown, watch it set on the page, and export a polished PDF. Free, open source, no sign-up.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: title,
+    template: "%s - markdowntopdf.sh",
+  },
+  description,
+  applicationName: SITE_NAME,
   keywords: [
     "markdown to pdf",
     "md to pdf",
+    "markdown to pdf converter",
     "markdown editor",
+    "convert markdown to pdf",
+    "export pdf",
+    "free markdown to pdf",
     "open source",
-    "pdf export",
   ],
+  authors: [{ name: "Meher Ullah Khan Raj", url: "https://github.com/raj-khan" }],
+  creator: "Meher Ullah Khan Raj",
+  category: "productivity",
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
   openGraph: {
-    title: "Markdown to PDF - free & open source",
+    title,
     description:
-      "Write Markdown with a live preview and download a polished PDF.",
-    url: siteUrl,
-    siteName: "markdowntopdf.sh",
+      "Write Markdown with a live preview and download a polished, vector-quality PDF. Free, open source, no sign-up.",
+    url: SITE_URL,
+    siteName: SITE_NAME,
     type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description:
+      "Write Markdown with a live preview and download a polished, vector-quality PDF. Free, open source, no sign-up.",
   },
 };
 
