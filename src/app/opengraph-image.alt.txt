@@ -1,0 +1,1 @@
+markdowntopdf.sh - a typesetting bench for plain text. Write Markdown and export a polished PDF.
