@@ -11,7 +11,7 @@ export const DEFAULT_DOC = `# Hi 👋 - welcome to markdowntopdf.sh
 
 
 
-## Author Info
+## Author
 <img src="https://github.com/raj-khan.png" alt="Meher Ullah Khan Raj" width="120" height="120" />
 
 
