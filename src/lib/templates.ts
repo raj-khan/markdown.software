@@ -7,64 +7,25 @@ export type Template = {
 
 export const DEFAULT_DOC = `# Hi 👋 - welcome to markdowntopdf.sh
 
-I built this **Markdown → PDF** tool so anyone can turn plain text into a
-polished document - **free, open source, no sign-up.**
+> New here? Just clear this text and start writing your own, then **Export PDF**. What you see is exactly what prints.
 
-Type on the left, watch it set on the page to the right, then **Export PDF**
-(or press ⇧⌘E). What you see is exactly what prints.
 
-> New here? Just clear this text and start writing your own.
 
-## What you can do
-
-- **GitHub-Flavored Markdown** - tables, task lists, footnotes, strikethrough
-- **Syntax-highlighted** code blocks
-- **Live preview** that matches the exported PDF exactly
-- **Page options** - A4 / Letter / Legal / A3 and custom margins
-- Templates, autosave, keyboard shortcuts, and a resizable / focus editor
-
-\`\`\`ts
-// your code is typeset, too
-export const greet = (name: string): string => \`Hello, \${name}!\`;
-\`\`\`
-
-## A quick demo
-
-| Feature      | Status |
-| ------------ | :----: |
-| Live preview |   ✅   |
-| PDF export   |   ✅   |
-| Open source  |   ✅   |
-
-- [x] Type some Markdown
-- [x] Watch the preview update
-- [ ] Export your PDF
-
-## Coming soon
-
-1. Optional accounts with **cloud-saved documents**, so your work follows you
-2. Shareable links to your pages
-
----
-
-## Built by Raj
-
+## Author Info
 <img src="https://github.com/raj-khan.png" alt="Meher Ullah Khan Raj" width="120" height="120" />
 
-I'm **Meher Ullah Khan Raj**, a software engineer in Kuala Lumpur building SaaS
-tools, developer-workflow automation, and open-source projects.
 
-- **GitHub** - https://github.com/raj-khan
-- **LinkedIn** - https://www.linkedin.com/in/raajkhan/
-- **Medium** - https://rajkhaan.medium.com/
+I'm **Meher Ullah Khan Raj**, a software engineer, building SaaS
+tools, developer workflow automation, and open-source projects. I built this **Markdown → PDF** tool so anyone can turn plain text into a polished document, and it's **free, open source, no sign-up required.**
+
+
+### Find me here
+* **GitHub** - https://github.com/raj-khan
+* **LinkedIn** - https://www.linkedin.com/in/raajkhan/
+* **Medium** - https://rajkhaan.medium.com/
 
 If this is useful, a ⭐ on [GitHub](https://github.com/raj-khan/markdown.software)
-means a lot - and contributions are very welcome.
-
-## Built with
-
-[Next.js](https://nextjs.org) · [Tailwind CSS](https://tailwindcss.com) · [unified / remark](https://unifiedjs.com) · [Puppeteer](https://pptr.dev) - open source under MIT, hosted on [Vercel](https://vercel.com).
-`;
+means a lot - and contributions are very welcome.`;
 
 export const TEMPLATES: Template[] = [
   {
