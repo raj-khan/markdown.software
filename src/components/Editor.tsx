@@ -6,6 +6,7 @@ import { useEditorStore } from "@/lib/store";
 import { SHORTCUTS, applyEdit, insertAtCursor } from "@/lib/md-edit";
 import { Toolbar } from "./Toolbar";
 import { Preview } from "./Preview";
+import { CodeArea } from "./CodeArea";
 
 const noopSubscribe = () => () => {};
 type View = "write" | "preview";
@@ -132,15 +133,11 @@ export function Editor() {
           } ${previewOnly ? "lg:hidden" : ""}`}
         >
           <Toolbar textareaRef={textareaRef} value={markdown} onChange={setMarkdown} />
-          <textarea
+          <CodeArea
             ref={textareaRef}
             value={markdown}
-            onChange={(e) => setMarkdown(e.target.value)}
+            onChange={setMarkdown}
             onKeyDown={handleKeyDown}
-            spellCheck={false}
-            aria-label="Markdown source"
-            placeholder="# Start typing…"
-            className="thin-scroll-dark min-h-0 flex-1 resize-none bg-shell p-4 font-mono text-[13px] leading-relaxed text-chalk caret-rust outline-none selection:bg-rust/30 sm:p-6 sm:text-sm"
           />
         </section>
 
