@@ -51,3 +51,29 @@ export async function downloadPdf({
     anchor.remove();
   }, 30_000);
 }
+
+/**
+ * Save the raw Markdown source as a .md file. Runs entirely in the browser -
+ * no round-trip to the server, since the source is already in hand. Shares the
+ * document name with the PDF export so the pair stays in sync.
+ */
+export function downloadMarkdown(markdown: string, filename: string): void {
+  const base = filename.trim() || "document";
+  const safeName = base.toLowerCase().endsWith(".md") ? base : `${base}.md`;
+
+  const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = safeName;
+  anchor.style.display = "none";
+  document.body.appendChild(anchor);
+  anchor.click();
+
+  // Same async-read race as the PDF path - defer cleanup so mobile can read it.
+  setTimeout(() => {
+    URL.revokeObjectURL(url);
+    anchor.remove();
+  }, 30_000);
+}

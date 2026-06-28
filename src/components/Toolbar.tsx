@@ -14,6 +14,7 @@ import {
   ListOrdered,
   Table,
   Minus,
+  Download,
 } from "lucide-react";
 import {
   wrap,
@@ -23,6 +24,8 @@ import {
   applyEdit,
   type Transform,
 } from "@/lib/md-edit";
+import { useEditorStore } from "@/lib/store";
+import { downloadMarkdown } from "@/lib/download";
 
 type ToolbarProps = {
   textareaRef: RefObject<HTMLTextAreaElement | null>;
@@ -80,6 +83,8 @@ const GROUPS: Button[][] = [
 ];
 
 export function Toolbar({ textareaRef, value, onChange }: ToolbarProps) {
+  const filename = useEditorStore((s) => s.filename);
+
   function handleClick(transform: Transform) {
     const el = textareaRef.current;
     if (!el) return;
@@ -109,6 +114,22 @@ export function Toolbar({ textareaRef, value, onChange }: ToolbarProps) {
           ))}
         </div>
       ))}
+
+      {/* Take the source out. Sits opposite the format actions, mirroring
+          "Export PDF" in the header - source leaves here, PDF leaves there. */}
+      <div className="ml-auto flex items-center gap-0.5 pl-1">
+        <span className="mx-1.5 h-4 w-px shrink-0 bg-shell-line" />
+        <button
+          type="button"
+          onClick={() => downloadMarkdown(value, filename)}
+          title="Download Markdown source (.md)"
+          aria-label="Download Markdown source"
+          className="focus-ring flex h-8 shrink-0 items-center gap-1.5 rounded-md px-2 text-xs font-medium text-chalk-dim transition-colors hover:bg-shell-raised hover:text-chalk"
+        >
+          <Download size={15} />
+          <span className="hidden sm:inline">.md</span>
+        </button>
+      </div>
     </div>
   );
 }
